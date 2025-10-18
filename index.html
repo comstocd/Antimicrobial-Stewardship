@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antibiotic Stewardship for IM Residents</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #1a202c;
+            overflow: hidden;
+        }
+
+        .presentation-container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .slide {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 3rem;
+            max-width: 1200px;
+            width: 100%;
+            height: 85vh;
+            display: none;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .slide.active {
+            display: flex;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            color: #1a202c;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            border-bottom: 4px solid #3182ce;
+            padding-bottom: 0.5rem;
+        }
+
+        h2 {
+            color: #2d3748;
+            font-size: 1.8rem;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        h3 {
+            color: #2c5282;
+            font-size: 1.3rem;
+            margin-top: 1.2rem;
+            margin-bottom: 0.8rem;
+        }
+
+        p, li {
+            color: #2d3748;
+            line-height: 1.7;
+            margin-bottom: 0.8rem;
+            font-size: 1.05rem;
+        }
+
+        ul {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        strong {
+            color: #2d3748;
+            font-weight: 600;
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            display: flex;
+            gap: 1rem;
+            z-index: 1000;
+        }
+
+        button {
+            background: white;
+            border: 2px solid #3182ce;
+            color: #3182ce;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        button:hover {
+            background: #3182ce;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(49, 130, 206, 0.4);
+        }
+
+        button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .slide-counter {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            background: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            color: #2c5282;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .subtitle {
+            color: #718096;
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+
+        .highlight-box {
+            background: #bee3f8;
+            border-left: 4px solid #2c5282;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        .title-slide {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .title-slide h1 {
+            font-size: 3rem;
+            border: none;
+            margin-bottom: 2rem;
+        }
+
+        .key-takeaway {
+            background: #2c5282;
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+
+        .key-takeaway h3 {
+            color: white;
+            margin-top: 0;
+        }
+
+        .key-takeaway p {
+            color: white;
+        }
+
+        .key-takeaway ol {
+            color: white;
+        }
+
+        .key-takeaway li {
+            color: white;
+        }
+
+        .key-takeaway strong {
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <!-- Slide 1: Title -->
+        <div class="slide active title-slide">
+            <img src="https://raw.githubusercontent.com/comstocd/Antimicrobial-Stewardship/main/Microbial_Mutants.jpg" alt="Antibiotic Resistance Illustration" style="max-width: 400px; margin-bottom: 2rem; border-radius: 12px;">
+            <h1>Antibiotic Stewardship for Internal Medicine Residents</h1>
+            <p class="subtitle">A Practical Guide to Optimizing Antimicrobial Use</p>
+            <p style="margin-top: 2rem; color: #718096; font-size: 1.1rem;">Evidence-Based Lecture</p>
+        </div>
+
+        <!-- Slide 2: Why Stewardship Matters -->
+        <div class="slide">
+            <h1>Why Stewardship Matters</h1>
+            
+            <h3>The Scope of the Problem</h3>
+            <ul>
+                <li><strong>~30% of antibiotic prescriptions are unnecessary or suboptimal</strong> (CDC estimate for outpatient settings)</li>
+                <li><strong>In the United States (CDC 2023):</strong>
+                    <ul>
+                        <li>More than 2.8 million antimicrobial-resistant infections annually</li>
+                        <li>Over 35,000 deaths per year</li>
+                        <li>143,000 emergency department visits for antibiotic-related adverse events</li>
+                    </ul>
+                </li>
+                <li><strong>Globally:</strong> Over 4 million deaths in 2019 associated with AMR (with modeling uncertainties)</li>
+                <li><strong>In hospitalized patients:</strong> 20% experience antibiotic-related adverse events</li>
+            </ul>
+        </div>
+
+        <!-- Slide 3: Consequences -->
+        <div class="slide">
+            <h1>Consequences of Inappropriate Use</h1>
+            
+            <h3>Immediate and Tangible Harms</h3>
+            <ul>
+                <li><strong>Patient harm:</strong> C. difficile infections, allergic reactions, drug toxicity, organ damage</li>
+                <li><strong>Clinical failures:</strong> Wrong drug, dose, or duration leading to treatment failures</li>
+                <li><strong>Hospital readmissions:</strong> Complications from inappropriate therapy</li>
+                <li><strong>Increased length of stay:</strong> With all associated risks</li>
+                <li><strong>Antimicrobial resistance:</strong> A complex, evolving threat</li>
+            </ul>
+        </div>
+
+        <!-- Slide 4: Resistance Landscape -->
+        <div class="slide">
+            <h1>Understanding the Resistance Landscape</h1>
+            
+            <h3>U.S. Trends</h3>
+            <div class="highlight-box">
+                <strong>Carbapenem-resistant Enterobacterales (CRE):</strong>
+                <ul>
+                    <li>Common gut bacteria (E. coli, Klebsiella) resistant to last-resort carbapenems</li>
+                    <li><strong>NDM (New Delhi metallo-beta-lactamase):</strong> enzyme that destroys nearly all beta-lactams</li>
+                    <li>Spreads on plasmids—small circular DNA pieces bacteria share</li>
+                    <li>NDM-producing CRE increased <strong>460%</strong> in U.S. (2019-2023)</li>
+                    <li>Mortality: 30-50% for bloodstream infections</li>
+                </ul>
+            </div>
+            <ul>
+                <li><strong>Candida auris:</strong> Nearly quadrupled (2019-2022)</li>
+                <li><strong>COVID-19 impact:</strong> 20% increase in hospital-onset resistant infections (reflects system stress)</li>
+            </ul>
+        </div>
+
+        <!-- Slide 5: Core Principles -->
+        <div class="slide">
+            <h1>Core Principles of Stewardship</h1>
+            
+            <h3>Three Primary Goals</h3>
+            <ol>
+                <li><strong>Optimize antibiotic use:</strong> Right drug, right dose, right duration</li>
+                <li><strong>Minimize adverse effects:</strong> From C. difficile to drug toxicity to resistance</li>
+                <li><strong>Prevent and reduce resistance:</strong> Preserve our antibiotic armamentarium</li>
+            </ol>
+
+            <h3>The Multidisciplinary Approach</h3>
+            <ul>
+                <li><strong>Infectious diseases consultants:</strong> Clinical expertise, protocol development</li>
+                <li><strong>Clinical pharmacists:</strong> Dosing optimization, therapeutic drug monitoring, IV-to-oral transitions</li>
+                <li><strong>Microbiology laboratory staff:</strong> Diagnostic stewardship, stratified antibiograms</li>
+                <li><strong>Nurses:</strong> Proper culture collection, antibiotic reviews</li>
+                <li><strong>YOU—the prescribing physician:</strong> Daily decisions at point of care</li>
+            </ul>
+        </div>
+
+        <!-- Slide 6: Key Interventions -->
+        <div class="slide">
+            <h1>Practical Stewardship Strategies</h1>
+            
+            <h3>Key Interventions</h3>
+            <ul>
+                <li><strong>Prospective Audit and Feedback:</strong> Expert review within 24-48 hours; reduces unnecessary antibiotic days by 37%</li>
+                <li><strong>Preauthorization:</strong> Expert approval for broad-spectrum or last-resort antibiotics</li>
+                <li><strong>Guidelines and Pathways:</strong> Evidence-based protocols tailored to local resistance</li>
+                <li><strong>Pharmacy-Driven Interventions:</strong>
+                    <ul>
+                        <li>IV-to-oral conversion</li>
+                        <li>Automatic stop orders (72-hour time-outs)</li>
+                        <li>Duplicate therapy alerts</li>
+                        <li>Dose optimization</li>
+                    </ul>
+                </li>
+                <li><strong>Microbiology Support:</strong> Stratified antibiograms, selective reporting, rapid diagnostics</li>
+            </ul>
+        </div>
+
+        <!-- Slide 7: Four Moments -->
+        <div class="slide">
+            <h1>The Four Moments Framework</h1>
+            
+            <h3>Moment 1: Does this patient need antibiotics?</h3>
+            <ul>
+                <li>Are there signs of bacterial infection beyond colonization?</li>
+                <li>Could this be viral, non-infectious, or self-limited?</li>
+                <li>Remember: ~30% of prescriptions are unnecessary or suboptimal</li>
+            </ul>
+
+            <h3>Moment 2: What diagnostics should I obtain?</h3>
+            <ul>
+                <li>Culture before antibiotics when safely possible</li>
+                <li>Order the right tests—not every fever needs blood cultures</li>
+                <li><strong>Don't send urine cultures on asymptomatic patients</strong></li>
+            </ul>
+        </div>
+
+        <!-- Slide 8: Four Moments Continued -->
+        <div class="slide">
+            <h1>The Four Moments Framework (cont.)</h1>
+            
+            <h3>Moment 3: What is optimal therapy?</h3>
+            <ul>
+                <li><strong>Empiric:</strong> Use local guidelines and antibiograms</li>
+                <li><strong>Definitive:</strong> De-escalate based on culture results</li>
+                <li>Choose narrow-spectrum agents when possible</li>
+            </ul>
+
+            <h3>Moment 4: When can I stop or narrow?</h3>
+            <ul>
+                <li>Daily reassessment: Are antibiotics still needed?</li>
+                <li>Can I narrow based on culture data?</li>
+                <li>Can I switch from IV to oral?</li>
+                <li>What is the appropriate total duration?</li>
+            </ul>
+
+            <div class="key-takeaway">
+                <h3>Critical Reminder</h3>
+                <p>Unnecessarily prolonged antibiotic courses lead to patient harm and should be avoided.</p>
+            </div>
+        </div>
+
+        <!-- Slide 9: Sepsis -->
+        <div class="slide">
+            <h1>High-Yield Scenarios: Sepsis</h1>
+            
+            <div class="highlight-box">
+                <strong>Key Point:</strong> Stewardship programs improve sepsis outcomes—they don't hinder care
+            </div>
+
+            <h3>Your Approach</h3>
+            <ul>
+                <li><strong>Initiate prompt empiric therapy</strong> based on local antibiograms and suspected source</li>
+                <li><strong>Implement protocols</strong> for rapid administration (within 1 hour)</li>
+                <li><strong>Obtain cultures</strong> before antibiotics when possible, but don't delay treatment</li>
+                <li><strong>Reassess daily:</strong> Tailor or stop therapy early when appropriate</li>
+                <li><strong>De-escalate</strong> as soon as culture data and clinical response allow</li>
+                <li><strong>Optimize duration</strong> based on source control and clinical improvement</li>
+            </ul>
+
+            <p><strong>Key principle:</strong> Fast initiation doesn't mean prolonged broad-spectrum therapy</p>
+        </div>
+
+        <!-- Slide 10: SSTIs -->
+        <div class="slide">
+            <h1>High-Yield Scenarios: Skin Infections</h1>
+            
+            <h3>Evidence-Based Approach</h3>
+            <p>Targeted interventions reduced antibiotic duration by 3 days and broad-spectrum use by 30%—with no increase in clinical failures</p>
+
+            <h3>Your Approach</h3>
+            <ul>
+                <li><strong>Purulent infections</strong> (abscesses, furuncles):
+                    <ul>
+                        <li>I&D is primary therapy</li>
+                        <li>Consider MRSA coverage initially, de-escalate based on cultures</li>
+                    </ul>
+                </li>
+                <li><strong>Non-purulent cellulitis:</strong>
+                    <ul>
+                        <li>Often don't need MRSA coverage unless risk factors present:</li>
+                        <li>Risk factors: Recent MRSA infection, injection drug use, recent incarceration, contact sports, HIV infection, recent hospitalization</li>
+                        <li>Beta-lactam (cephalexin, cefazolin) usually sufficient for uncomplicated cases</li>
+                    </ul>
+                </li>
+                <li><strong>Duration:</strong> 5 days if improving for uncomplicated infections</li>
+            </ul>
+        </div>
+
+        <!-- Slide 11: ASB -->
+        <div class="slide">
+            <h1>High-Yield Scenarios: Asymptomatic Bacteriuria</h1>
+            
+            <div class="highlight-box">
+                <strong>The Problem:</strong> We dramatically overtreat ASB
+            </div>
+
+            <h3>Evidence</h3>
+            <p>Stewardship interventions reduced ASB treatment, with antibiotic use decreasing by 30% over 30 months—sustained without patient harm</p>
+
+            <h3>Your Approach</h3>
+            <ul>
+                <li><strong>Only obtain urine cultures in patients with urinary symptoms</strong></li>
+                <li>Pyuria alone is NOT an indication for treatment</li>
+                <li>Positive cultures in catheterized patients usually represent colonization</li>
+                <li><strong>Only treat ASB in two populations:</strong>
+                    <ul>
+                        <li>Pregnant patients</li>
+                        <li>Before urologic procedures with expected bleeding</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Slide 12: CAP -->
+        <div class="slide">
+            <h1>High-Yield Scenarios: Community-Acquired Pneumonia</h1>
+            
+            <h3>Evidence</h3>
+            <p>Stewardship improved appropriate CAP treatment from 65% to 91%. Guideline-adherent therapy significantly reduces mortality.</p>
+
+            <h3>Your Approach</h3>
+            <ul>
+                <li><strong>Determine if bacterial:</strong> 
+                    <ul>
+                        <li>Use respiratory viral panels to rule out viral etiologies</li>
+                        <li>Procalcitonin (PCT) can help assess bacterial likelihood (IDSA/ATS: don't use PCT alone to initiate therapy)</li>
+                        <li><strong>Serial PCT:</strong> Can support early antibiotic discontinuation when declining (≥80% from peak or <0.5 ng/mL) plus clinical improvement</li>
+                    </ul>
+                </li>
+                <li><strong>Empiric therapy:</strong>
+                    <ul>
+                        <li>Beta-lactam plus macrolide OR respiratory fluoroquinolone for most</li>
+                        <li>Add MRSA coverage only with risk factors (test MRSA colonization)</li>
+                        <li>Add Pseudomonal coverage only with structural lung disease or recent healthcare exposure</li>
+                    </ul>
+                </li>
+                <li><strong>Obtain respiratory cultures</strong> when feasible to tailor therapy</li>
+                <li><strong>Duration:</strong> 5-7 days for most patients who improve (serial PCT can guide early discontinuation)</li>
+                <li><strong>Switch to oral</strong> within 2-3 days when appropriate</li>
+            </ul>
+        </div>
+
+        <!-- Slide 13: UTIs -->
+        <div class="slide">
+            <h1>High-Yield Scenarios: Urinary Tract Infections</h1>
+            
+            <h3>Your Approach</h3>
+            <ul>
+                <li><strong>Distinguish:</strong> Cystitis vs. pyelonephritis vs. asymptomatic bacteriuria</li>
+                <li><strong>Only obtain urine cultures in patients with urinary symptoms</strong></li>
+                <li><strong>Don't treat ASB</strong> except in pregnancy or before urologic procedures with bleeding</li>
+                <li><strong>Uncomplicated cystitis:</strong> 3 days for most agents (nitrofurantoin, TMP-SMX)</li>
+                <li><strong>Avoid fluoroquinolones</strong> for uncomplicated UTI when alternatives exist</li>
+                <li><strong>Pyelonephritis:</strong> 5-7 days with pathogen-directed therapy if clinical improvement</li>
+            </ul>
+
+            <p><strong>Key Point:</strong> Pyuria alone is NOT an indication for treatment</p>
+        </div>
+
+        <!-- Slide 14: Diagnostic Stewardship -->
+        <div class="slide">
+            <h1>Diagnostic Stewardship</h1>
+            
+            <h3>Understanding Your Microbiology Lab</h3>
+            <ul>
+                <li><strong>The antibiogram:</strong> Local resistance patterns updated annually—should guide empiric choices</li>
+                <li><strong>Rapid diagnostics:</strong>
+                    <ul>
+                        <li>Blood culture gram stain: narrow therapy immediately</li>
+                        <li>Rapid PCR panels: interpret carefully (colonization vs. infection)</li>
+                        <li>MRSA nasal swab: high negative predictive value</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>Interpreting Results</h3>
+            <ul>
+                <li><strong>Contamination vs. true infection:</strong>
+                    <ul>
+                        <li>Single positive blood culture with coagulase-negative Staph: likely contaminant</li>
+                        <li>Multiple organisms in urine culture: often contamination from poor collection technique</li>
+                    </ul>
+                </li>
+                <li><strong>Colonization vs. infection:</strong>
+                    <ul>
+                        <li>Respiratory culture with normal flora doesn't rule out pneumonia</li>
+                        <li>MRSA in sputum of ventilated patient: requires clinical criteria (new infiltrate, fever, leukocytosis, purulent secretions) to diagnose VAP—don't treat culture alone</li>
+                        <li>Positive urine culture without symptoms: asymptomatic bacteriuria, not infection</li>
+                    </ul>
+                </li>
+                <li><strong>Clinical context always matters</strong>—not every organism cultured requires treatment</li>
+            </ul>
+        </div>
+
+        <!-- Slide 15: Barriers -->
+        <div class="slide">
+            <h1>Overcoming Barriers to Stewardship</h1>
+            
+            <h3>Common Challenges</h3>
+            <ul>
+                <li><strong>Diagnostic uncertainty:</strong> Not all fever is infection—use clinical judgment</li>
+                <li><strong>Prescriber habits:</strong> "This is how we've always done it"</li>
+                <li><strong>Pressure to prescribe:</strong> From patients, families, or colleagues</li>
+                <li><strong>System-level barriers:</strong> Limited diagnostics, access to ID consultation, time constraints</li>
+            </ul>
+
+            <h3>Strategies That Work</h3>
+            <ul>
+                <li><strong>Use the Four Moments framework:</strong>
+                    <ul>
+                        <li>1. Does this patient need antibiotics?</li>
+                        <li>2. What diagnostics should I obtain?</li>
+                        <li>3. What is optimal therapy?</li>
+                        <li>4. When can I stop or narrow?</li>
+                    </ul>
+                </li>
+                <li>Document your reasoning and planned reassessment</li>
+                <li>Seek feedback from stewardship teams</li>
+                <li>Stay current with guidelines</li>
+                <li>Real-time feedback and EMR integration</li>
+            </ul>
+        </div>
+
+        <!-- Slide 16: Special Populations -->
+        <div class="slide">
+            <h1>Special Populations: Immunocompromised</h1>
+            
+            <h3>Who We're Talking About</h3>
+            <ul>
+                <li>Neutropenic patients (chemotherapy, bone marrow failure)</li>
+                <li>Solid organ and stem cell transplant recipients</li>
+                <li>Patients on immunosuppressive therapy</li>
+                <li>Advanced HIV/AIDS</li>
+            </ul>
+
+            <h3>Key Differences</h3>
+            <ul>
+                <li>Lower threshold for broad-spectrum empiric therapy</li>
+                <li>More cautious approach to de-escalation</li>
+                <li>Longer durations may be appropriate</li>
+                <li>Prophylaxis plays a larger role</li>
+                <li><strong>Antifungal stewardship:</strong> Similar principles, use fungal diagnostics (β-D-glucan, galactomannan)</li>
+            </ul>
+
+            <p><strong>The Balance:</strong> Even in immunocompromised patients, stewardship principles apply—we just apply them more carefully</p>
+        </div>
+
+        <!-- Slide 17: Measuring Impact -->
+        <div class="slide">
+            <h1>Measuring Impact</h1>
+            
+            <h3>Process Measures</h3>
+            <ul>
+                <li>Antibiotic consumption (days of therapy, defined daily doses)</li>
+                <li>Guideline compliance rates</li>
+                <li>Time to appropriate therapy</li>
+                <li>De-escalation and IV-to-oral conversion rates</li>
+            </ul>
+
+            <h3>Outcome Measures</h3>
+            <ul>
+                <li><strong>Length of stay:</strong> Reductions of 1-1.7 days in meta-analyses</li>
+                <li><strong>Mortality:</strong> Decreases of 3.71 deaths per 100 admissions in one study</li>
+                <li><strong>Adverse events:</strong> C. difficile, allergic reactions (143,000 ED visits annually), toxicity</li>
+                <li><strong>30-day readmission rates</strong></li>
+                <li><strong>Resistance patterns</strong></li>
+                <li><strong>Cost savings:</strong> 34% reductions demonstrated</li>
+            </ul>
+        </div>
+
+        <!-- Slide 18: Evidence Base -->
+        <div class="slide">
+            <h1>The Evidence Base</h1>
+            
+            <h3>Cochrane Systematic Review of Stewardship Interventions</h3>
+            <p>Meta-analysis of 221 studies (Davey et al. 2017) demonstrates stewardship interventions achieve:</p>
+            <ul>
+                <li>15% increase in antibiotic policy compliance</li>
+                <li>Nearly 2 days reduction in therapy duration</li>
+                <li>1.12 days decrease in hospital length of stay</li>
+                <li>Reduced adverse events including C. difficile</li>
+                <li><strong>Do not increase mortality or clinical failures</strong></li>
+            </ul>
+
+            <h3>Comprehensive Meta-Analysis</h3>
+            <p>Hospital-based stewardship programs achieved:</p>
+            <ul>
+                <li>19% reduction in total antimicrobial consumption</li>
+                <li>8.9% reduction in hospital length of stay</li>
+                <li>Decreased infections with resistant pathogens (MRSA, ESBL organisms)</li>
+                <li>Improved healthcare resource utilization</li>
+            </ul>
+        </div>
+
+        <!-- Slide 19: Your Role -->
+        <div class="slide">
+            <h1>Your Role as a Resident</h1>
+            
+            <h3>Daily Practices</h3>
+            <ul>
+                <li>Use the Four Moments framework for every patient on antibiotics</li>
+                <li>Review and reassess antibiotics on rounds daily</li>
+                <li>Engage constructively with stewardship recommendations</li>
+                <li>Ask "why" when you see excessive prescribing patterns</li>
+            </ul>
+
+            <h3>Learning Opportunities</h3>
+            <ul>
+                <li>Attend stewardship rounds if available</li>
+                <li>Review your own prescribing patterns with attendings</li>
+                <li>Understand the reasoning behind recommendations</li>
+                <li>Consider QI projects in stewardship</li>
+            </ul>
+
+            <h3>Building the Right Habits</h3>
+            <p>The prescribing patterns you develop now will follow you throughout your career. Build habits of thoughtful selection, regular reassessment, and evidence-based practice.</p>
+        </div>
+
+        <!-- Slide 20: Key Takeaways -->
+        <div class="slide">
+            <h1>Key Takeaways</h1>
+            
+            <div class="key-takeaway">
+                <h3>Core Principles to Remember</h3>
+                <ol>
+                    <li><strong>Every antibiotic prescription matters</strong> in the fight against resistance</li>
+                    <li><strong>Use the Four Moments</strong> to systematically approach antibiotic decisions</li>
+                    <li><strong>Shorter is often better:</strong> Many infections require less treatment than historically provided</li>
+                    <li><strong>De-escalate whenever possible:</strong> Narrow based on cultures and clinical response</li>
+                    <li><strong>Don't treat colonization:</strong> Especially ASB and single positive blood cultures</li>
+                    <li><strong>Partner with your stewardship team:</strong> They're a resource, not an adversary</li>
+                </ol>
+            </div>
+
+            <h3>The Bottom Line</h3>
+            <p>Good stewardship improves patient outcomes, reduces length of stay, decreases mortality, and combats resistance—all while reducing costs. You have the opportunity and responsibility to be excellent stewards.</p>
+        </div>
+
+        <!-- Slide 21: Resources -->
+        <div class="slide">
+            <h1>Additional Resources</h1>
+            
+            <h3>Guidelines</h3>
+            <ul>
+                <li><strong>IDSA/SHEA Guidelines:</strong>
+                    <ul>
+                        <li>2016 Implementing an Antibiotic Stewardship Program</li>
+                        <li>2007 Guidelines for Developing an Institutional Program</li>
+                    </ul>
+                </li>
+                <li><strong>CDC Resources:</strong>
+                    <ul>
+                        <li>Core Elements of Hospital Antibiotic Stewardship Programs</li>
+                        <li>2024 Antibiotic Stewardship Resource Bundles</li>
+                        <li>Core Elements of Outpatient Antibiotic Stewardship</li>
+                    </ul>
+                </li>
+                <li><strong>AAP Guidelines:</strong> 2021 Antibiotic Stewardship in Pediatrics</li>
+            </ul>
+
+            <h3>Local Resources</h3>
+            <ul>
+                <li>Your institution's antibiogram and local guidelines</li>
+                <li>Your hospital's stewardship team - introduce yourself!</li>
+            </ul>
+        </div>
+
+        <!-- Slide 22: Questions -->
+        <div class="slide title-slide">
+            <h1>Questions & Discussion</h1>
+            <p class="subtitle">What scenarios have you encountered that challenge appropriate antibiotic use?</p>
+            <p class="subtitle">What barriers do you face in implementing these principles?</p>
+            <p style="margin-top: 3rem; color: #718096;">Thank you for your attention.<br>Now let's put these principles into practice on the wards.</p>
+        </div>
+    </div>
+
+    <div class="slide-counter">
+        <span id="current-slide">1</span> / <span id="total-slides">22</span>
+    </div>
+
+    <div class="navigation">
+        <button id="prev-btn" onclick="previousSlide()">← Previous</button>
+        <button id="next-btn" onclick="nextSlide()">Next →</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        
+        document.getElementById('total-slides').textContent = totalSlides;
+
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            
+            document.getElementById('current-slide').textContent = currentSlide + 1;
+            
+            // Update button states
+            document.getElementById('prev-btn').disabled = currentSlide === 0;
+            document.getElementById('next-btn').disabled = currentSlide === totalSlides - 1;
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                showSlide(currentSlide + 1);
+            }
+        }
+
+        function previousSlide() {
+            if (currentSlide > 0) {
+                showSlide(currentSlide - 1);
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                previousSlide();
+            }
+        });
+
+        // Initialize
+        showSlide(0);
+    </script>
+</body>
+</html>
